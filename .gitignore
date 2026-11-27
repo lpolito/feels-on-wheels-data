@@ -1,0 +1,10 @@
+# The datasets. Their terms don't allow redistribution, so they're never committed, even here.
+# Download them as README.md says.
+/glasgow/
+/nrc-vad/
+/paper-fulltext/
+/swow/
+/warriner2013/
+*.zip
+__pycache__/
+.DS_Store
