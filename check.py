@@ -46,7 +46,7 @@ ngrams = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ngrams)
 
 PLEASANT = {"Happy", "Love"}
-RARE = 15.0            # per billion: rare only when every count is under this (src/data/README.md, "Usage")
+RARE = 15.0            # per billion: rare only when every count is under this (src/data/README.md, "Checks", the rare flag)
 SYNONYM_RATIO = 2.0    # Lucas, 2026-11-20: commonness decides a swap at twice as often
 SWOW_TOP = 10          # how many of a word's strongest associations to consider
 
@@ -61,19 +61,19 @@ MAX_OUTER = 3          # Lucas, 2026-11-20: never 4, and 3 only when the third w
 NOUNS = {"Love", "Joy", "Awe", "Affection", "Tenderness", "Compassion", "Sympathy", "Desire",
          "Grief", "Heartache", "Dread", "Rage", "Contempt", "Hatred", "Remorse", "Regret", "Cringe"}
 
-# Phrases that aren't the feeling, subtracted from a count (src/data/README.md, "Usage"). Each is
+# Phrases that aren't the feeling, subtracted from a count (src/data/README.md, "Checks", the rare flag). Each is
 # named in the reason the change gives for the word. If they're most of a count, it's dropped.
 NOT_FEELINGS = {
     "Used": ["I was used to"],
     "Exposed": ["I was exposed to"],
     "Accepted": ["I was accepted into", "I was accepted to", "I was accepted at", "I was accepted by"],
-    # Synonym candidates, keyed in lowercase (src/data/README.md, "What the research supports"):
+    # Synonym candidates, keyed in lowercase (src/data/README.md, "Checks", the more common synonym flag):
     # "afraid that" is a hedge, and "feel sorry for" is 98% of "feel sorry" (pity, not regret).
     "afraid": ["I was afraid that"],
     "sorry": ["feel sorry for", "feeling sorry for", "felt sorry for", "I was sorry for"],
 }
 
-# A wrong-side pleasantness result cleared by a recorded reason (src/data/README.md, "Pleasantness").
+# A wrong-side pleasantness result cleared by a recorded reason (src/data/README.md, "Checks", Pleasantness).
 PLEASANTNESS_REASONS = {}
 
 # For the unscored hint: a base form the lists may score.
@@ -81,7 +81,7 @@ BASE_FORMS = {"Cheated": "cheat", "Empowered": "empowerment", "Cared for": "care
               "Accepted": "acceptance", "Pressured": "pressure", "Conflicted": "conflict", "Insulted": "insult",
               "Disillusioned": "disillusionment", "Repulsed": "repulsive", "Possessive": "possession",
               "Out of place": "misplaced", "Burned out": "burnout", "Thrilled": "thrill"}
-# Words on the wheel twice on purpose (src/data/README.md, Always 3): each meaning under the core its own users would tap.
+# Words on the wheel twice on purpose (src/data/README.md, "Always", a word in two places): each meaning under the core its own users would tap.
 SPLITS = {"disgusted", "betrayed", "empty"}  # Lucas, 2026-11-22: Disgusted physical under Bad, moral under Angry; Betrayed under Sad and Angry, and Empty under Bad and Sad, as people split
 MIN_OUTER = 2
 
@@ -195,7 +195,7 @@ def load_swow(cues):
 
 
 def base_key(label, labels):
-    """Love and Loved are the same word (src/data/README.md, "Once")."""
+    """Love and Loved are the same word (src/data/README.md, "Checks", Once)."""
     w = label.lower()
     for suffix in ("d", "ed"):
         if w.endswith(suffix) and w[: -len(suffix)] in labels:
